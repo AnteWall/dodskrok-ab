@@ -8,6 +8,6 @@
   "dependencies": {
     "apollo-server": "2.9.7",
     "graphql": "14.5.8",
-    "typescript": "3.7.0-beta"
+    "typescript": "3.7.2"
   }
 }

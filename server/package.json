@@ -15,22 +15,22 @@
     "graphql": "14.5.8",
     "graphql-import": "0.7.1",
     "graphql-tag": "2.10.1",
-    "koa": "2.10.0",
+    "koa": "2.11.0",
     "mongodb": "3.3.3",
-    "mongoose": "^5.7.8",
-    "typescript": "3.7.0-beta"
+    "mongoose": "5.7.8",
+    "typescript": "3.7.2"
   },
   "devDependencies": {
-    "@graphql-codegen/cli": "^1.8.2",
-    "@graphql-codegen/introspection": "1.8.2",
-    "@graphql-codegen/typescript": "1.8.2",
-    "@graphql-codegen/typescript-mongodb": "1.8.2",
-    "@graphql-codegen/typescript-resolvers": "1.8.2",
+    "@graphql-codegen/cli": "1.8.3",
+    "@graphql-codegen/introspection": "1.8.3",
+    "@graphql-codegen/typescript": "1.8.3",
+    "@graphql-codegen/typescript-mongodb": "1.8.3",
+    "@graphql-codegen/typescript-resolvers": "1.8.3",
     "@types/koa": "2.0.51",
-    "@types/mongodb": "3.3.6",
+    "@types/mongodb": "3.3.8",
     "@types/mongoose": "5.5.29",
     "concurrently": "5.0.0",
     "cross-env": "6.0.3",
-    "ts-node-dev": "^1.0.0-pre.43"
+    "ts-node-dev": "1.0.0-pre.44"
   }
 }
