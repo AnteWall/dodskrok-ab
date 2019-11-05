@@ -1,0 +1,17 @@
+# import User from "user.graphql"
+# import Player from "player.graphql"
+# import Lobby from "lobby.graphql"
+
+type Query {
+  hello: String!
+  lobby(id: ID!): Lobby!
+  lobbies: [Lobby]!
+}
+
+type Mutation {
+  createLobby(input: CreateLobbyInput!): Lobby!
+}
+
+input CreateLobbyInput {
+  name: String!
+}

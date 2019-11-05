@@ -1,0 +1,5 @@
+type Lobby {
+  players: [Player]!
+  name: String!
+  id: String!
+}

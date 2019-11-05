@@ -1,0 +1,4 @@
+type Player {
+  user: User!
+  score: Int!
+}

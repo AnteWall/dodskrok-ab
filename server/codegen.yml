@@ -1,0 +1,15 @@
+overwrite: true
+schema: src/schemas/*.graphql
+documents: null
+generates:
+  src/generated/graphql.ts:
+    config:
+      mappers:
+        Lobby: ../dataSources/MongoApi/models/LobbyModel#LobbyModel
+    plugins:
+      - 'typescript'
+      - 'typescript-resolvers'
+      - 'typescript-mongodb'
+  ./graphql.schema.json:
+    plugins:
+      - 'introspection'
