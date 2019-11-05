@@ -1,0 +1,8 @@
+type AuthToken {
+  jwt: String!
+}
+
+type DebugToken {
+  deviceId: String!
+  id: String!
+}

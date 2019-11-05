@@ -19,13 +19,29 @@ export type Scalars = {
 
 
 
+
 export type AdditionalEntityFields = {
   path?: Maybe<Scalars['String']>,
   type?: Maybe<Scalars['String']>,
 };
 
+export type AuthToken = {
+   __typename?: 'AuthToken',
+  jwt: Scalars['String'],
+};
+
 export type CreateLobbyInput = {
   name: Scalars['String'],
+};
+
+export type DebugToken = {
+   __typename?: 'DebugToken',
+  deviceId: Scalars['String'],
+  id: Scalars['String'],
+};
+
+export type JoinLobbyInput = {
+  lobbyId: Scalars['ID'],
 };
 
 export type Lobby = {
@@ -37,12 +53,25 @@ export type Lobby = {
 
 export type Mutation = {
    __typename?: 'Mutation',
+  authenticate: AuthToken,
+  debugToken: DebugToken,
   createLobby: Lobby,
+  joinLobby: Lobby,
+};
+
+
+export type MutationAuthenticateArgs = {
+  deviceId: Scalars['String']
 };
 
 
 export type MutationCreateLobbyArgs = {
   input: CreateLobbyInput
+};
+
+
+export type MutationJoinLobbyArgs = {
+  input: JoinLobbyInput
 };
 
 export type Player = {
@@ -148,7 +177,10 @@ export type ResolversTypes = {
   User: ResolverTypeWrapper<User>,
   Int: ResolverTypeWrapper<Scalars['Int']>,
   Mutation: ResolverTypeWrapper<{}>,
+  AuthToken: ResolverTypeWrapper<AuthToken>,
+  DebugToken: ResolverTypeWrapper<DebugToken>,
   CreateLobbyInput: CreateLobbyInput,
+  JoinLobbyInput: JoinLobbyInput,
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>,
   AdditionalEntityFields: AdditionalEntityFields,
 };
@@ -163,10 +195,15 @@ export type ResolversParentTypes = {
   User: User,
   Int: Scalars['Int'],
   Mutation: {},
+  AuthToken: AuthToken,
+  DebugToken: DebugToken,
   CreateLobbyInput: CreateLobbyInput,
+  JoinLobbyInput: JoinLobbyInput,
   Boolean: Scalars['Boolean'],
   AdditionalEntityFields: AdditionalEntityFields,
 };
+
+export type AuthDirectiveResolver<Result, Parent, ContextType = any, Args = {  }> = DirectiveResolverFn<Result, Parent, ContextType, Args>;
 
 export type UnionDirectiveResolver<Result, Parent, ContextType = any, Args = {   discriminatorField?: Maybe<Maybe<Scalars['String']>>,
   additionalFields?: Maybe<Maybe<Array<Maybe<AdditionalEntityFields>>>> }> = DirectiveResolverFn<Result, Parent, ContextType, Args>;
@@ -187,6 +224,15 @@ export type EmbeddedDirectiveResolver<Result, Parent, ContextType = any, Args = 
 
 export type MapDirectiveResolver<Result, Parent, ContextType = any, Args = {   path?: Maybe<Scalars['String']> }> = DirectiveResolverFn<Result, Parent, ContextType, Args>;
 
+export type AuthTokenResolvers<ContextType = any, ParentType extends ResolversParentTypes['AuthToken'] = ResolversParentTypes['AuthToken']> = {
+  jwt?: Resolver<ResolversTypes['String'], ParentType, ContextType>,
+};
+
+export type DebugTokenResolvers<ContextType = any, ParentType extends ResolversParentTypes['DebugToken'] = ResolversParentTypes['DebugToken']> = {
+  deviceId?: Resolver<ResolversTypes['String'], ParentType, ContextType>,
+  id?: Resolver<ResolversTypes['String'], ParentType, ContextType>,
+};
+
 export type LobbyResolvers<ContextType = any, ParentType extends ResolversParentTypes['Lobby'] = ResolversParentTypes['Lobby']> = {
   players?: Resolver<Array<Maybe<ResolversTypes['Player']>>, ParentType, ContextType>,
   name?: Resolver<ResolversTypes['String'], ParentType, ContextType>,
@@ -194,7 +240,10 @@ export type LobbyResolvers<ContextType = any, ParentType extends ResolversParent
 };
 
 export type MutationResolvers<ContextType = any, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = {
+  authenticate?: Resolver<ResolversTypes['AuthToken'], ParentType, ContextType, RequireFields<MutationAuthenticateArgs, 'deviceId'>>,
+  debugToken?: Resolver<ResolversTypes['DebugToken'], ParentType, ContextType>,
   createLobby?: Resolver<ResolversTypes['Lobby'], ParentType, ContextType, RequireFields<MutationCreateLobbyArgs, 'input'>>,
+  joinLobby?: Resolver<ResolversTypes['Lobby'], ParentType, ContextType, RequireFields<MutationJoinLobbyArgs, 'input'>>,
 };
 
 export type PlayerResolvers<ContextType = any, ParentType extends ResolversParentTypes['Player'] = ResolversParentTypes['Player']> = {
@@ -214,6 +263,8 @@ export type UserResolvers<ContextType = any, ParentType extends ResolversParentT
 };
 
 export type Resolvers<ContextType = any> = {
+  AuthToken?: AuthTokenResolvers<ContextType>,
+  DebugToken?: DebugTokenResolvers<ContextType>,
   Lobby?: LobbyResolvers<ContextType>,
   Mutation?: MutationResolvers<ContextType>,
   Player?: PlayerResolvers<ContextType>,
@@ -228,6 +279,7 @@ export type Resolvers<ContextType = any> = {
 */
 export type IResolvers<ContextType = any> = Resolvers<ContextType>;
 export type DirectiveResolvers<ContextType = any> = {
+  auth?: AuthDirectiveResolver<any, any, ContextType>,
   union?: UnionDirectiveResolver<any, any, ContextType>,
   abstractEntity?: AbstractEntityDirectiveResolver<any, any, ContextType>,
   entity?: EntityDirectiveResolver<any, any, ContextType>,

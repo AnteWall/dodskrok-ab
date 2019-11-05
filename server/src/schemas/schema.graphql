@@ -1,6 +1,9 @@
 # import User from "user.graphql"
 # import Player from "player.graphql"
 # import Lobby from "lobby.graphql"
+# import * from "auth.graphql"
+
+directive @auth on FIELD_DEFINITION
 
 type Query {
   hello: String!
@@ -9,9 +12,16 @@ type Query {
 }
 
 type Mutation {
+  authenticate(deviceId: String!): AuthToken!
+  debugToken: DebugToken! @auth
+
   createLobby(input: CreateLobbyInput!): Lobby!
+  joinLobby(input: JoinLobbyInput!): Lobby!
 }
 
 input CreateLobbyInput {
   name: String!
+}
+input JoinLobbyInput {
+  lobbyId: ID!
 }
