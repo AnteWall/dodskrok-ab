@@ -1,5 +1,5 @@
-import Player, { PlayerModel } from "../models/PlayerModel";
-import { Types } from "mongoose";
+import Player, { PlayerModel } from '../models/PlayerModel';
+import { Types } from 'mongoose';
 
 export default class PlayerController {
   async getPlayers(playerIds: string[]): Promise<PlayerModel[]> {
@@ -11,7 +11,7 @@ export default class PlayerController {
   }
 
   async createPlayer(
-    args: Pick<PlayerModel, "username" | "deviceId">
+    args: Pick<PlayerModel, 'username' | 'deviceId'>
   ): Promise<PlayerModel> {
     return await Player.create(args);
   }

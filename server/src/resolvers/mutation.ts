@@ -1,8 +1,8 @@
-import { MutationResolvers } from "../generated/graphql";
-import { GraphQLContext } from "./resolvers";
-import { sign } from "jsonwebtoken";
+import { MutationResolvers } from '../generated/graphql';
+import { GraphQLContext } from './resolvers';
+import { sign } from 'jsonwebtoken';
 
-const SECRET = process.env.SECRET_TOKEN || "development";
+const SECRET = process.env.SECRET_TOKEN || 'development';
 
 interface DebugToken {
   id: string;

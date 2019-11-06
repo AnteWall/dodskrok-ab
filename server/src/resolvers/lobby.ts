@@ -1,5 +1,5 @@
-import { LobbyResolvers } from "../generated/graphql";
-import { GraphQLContext } from "./resolvers";
+import { LobbyResolvers } from '../generated/graphql';
+import { GraphQLContext } from './resolvers';
 
 const lobbyResolvers: LobbyResolvers<GraphQLContext> = {
   id: parent => parent._id,

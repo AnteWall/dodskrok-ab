@@ -1,6 +1,6 @@
-import Lobby, { LobbyModel } from "../models/LobbyModel";
-import { NotFoundError } from "../../../utils/errors";
-import PlayerController from "./PlayerController";
+import Lobby, { LobbyModel } from '../models/LobbyModel';
+import { NotFoundError } from '../../../utils/errors';
+import PlayerController from './PlayerController';
 
 interface JoinLobbyArguments {
   lobbyId: string;
@@ -37,7 +37,7 @@ export default class LobbyController {
   }
 
   async createLobby(
-    args: Pick<LobbyModel, "name" | "playerIds">
+    args: Pick<LobbyModel, 'name' | 'playerIds'>
   ): Promise<LobbyModel> {
     return await Lobby.create(args);
   }

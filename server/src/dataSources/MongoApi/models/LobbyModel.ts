@@ -1,4 +1,4 @@
-import { model, Document, Schema } from "mongoose";
+import { model, Document, Schema } from 'mongoose';
 
 export interface LobbyModel extends Document {
   name: string;
@@ -10,5 +10,5 @@ const LobbySchema = new Schema({
   playerIds: { type: [String], required: true }
 });
 
-const Lobby = model<LobbyModel>("Lobby", LobbySchema);
+const Lobby = model<LobbyModel>('Lobby', LobbySchema);
 export default Lobby;
