@@ -9,6 +9,7 @@
             "changeProcessCWD": true
         }
     ],
+    "eslint.autoFixOnSave": true,
     "eslint.validate": [
         "javascript",
         "javascriptreact",

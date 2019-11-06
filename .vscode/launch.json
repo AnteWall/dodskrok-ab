@@ -11,6 +11,16 @@
             "restart": true,
             "localRoot": "${workspaceFolder}",
             "remoteRoot": "."
+        },
+        {
+            "name": "Chrome - Client",
+            "type": "chrome",
+            "request": "launch",
+            "url": "http://localhost:3000",
+            "webRoot": "${workspaceFolder}/client/src",
+            "sourceMapPathOverrides": {
+                "webpack:///src/*": "${webRoot}/*"
+            }
         }
     ]
 }
