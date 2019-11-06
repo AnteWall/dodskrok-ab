@@ -31,8 +31,14 @@
     "@types/koa": "2.0.51",
     "@types/mongodb": "3.3.8",
     "@types/mongoose": "5.5.29",
+    "@typescript-eslint/eslint-plugin": "2.6.1",
+    "@typescript-eslint/parser": "^2.6.1",
     "concurrently": "5.0.0",
     "cross-env": "6.0.3",
+    "eslint": "^6.6.0",
+    "eslint-config-prettier": "^6.5.0",
+    "eslint-plugin-prettier": "^3.1.1",
+    "prettier": "^1.18.2",
     "ts-node-dev": "1.0.0-pre.44"
   }
 }

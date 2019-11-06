@@ -1,4 +1,3 @@
-# import User from "user.graphql"
 # import Player from "player.graphql"
 # import Lobby from "lobby.graphql"
 # import * from "auth.graphql"
@@ -16,7 +15,7 @@ type Mutation {
   debugToken: DebugToken! @auth
 
   createLobby(input: CreateLobbyInput!): Lobby!
-  joinLobby(input: JoinLobbyInput!): Lobby!
+  joinLobby(input: JoinLobbyInput!): Lobby! @auth
 }
 
 input CreateLobbyInput {

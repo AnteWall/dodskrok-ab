@@ -1,16 +1,16 @@
-import { SchemaDirectiveVisitor } from 'graphql-tools';
-import { defaultFieldResolver } from 'graphql';
-import { verify } from 'jsonwebtoken';
-import { AuthenticationError } from 'apollo-server-koa';
-import { AuthToken, DebugToken } from '../generated/graphql';
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { SchemaDirectiveVisitor } from "graphql-tools";
+import { defaultFieldResolver } from "graphql";
+import { verify } from "jsonwebtoken";
+import { AuthenticationError } from "apollo-server-koa";
+import { DebugToken } from "../generated/graphql";
 
-const AUTH_SECRET_KEY = process.env.SECRET_KEY || 'development';
+const AUTH_SECRET_KEY = process.env.SECRET_KEY || "development";
 
 export default class AuthDirective extends SchemaDirectiveVisitor {
-  visitFieldDefinition(field: any) {
+  visitFieldDefinition(field: any): any {
     const { resolve = defaultFieldResolver } = field;
-    field.resolve = async function(...args: any[]) {
-      const date = await resolve.apply(this, args);
+    field.resolve = async function(...args: any[]): Promise<any> {
       const context = args[2];
       if (context && context.headers.authorization) {
         try {
@@ -19,13 +19,13 @@ export default class AuthDirective extends SchemaDirectiveVisitor {
             AUTH_SECRET_KEY
           ) as DebugToken;
           context.authToken = authToken;
-          const result = await resolve.apply(this, args);
-          return result;
         } catch (err) {
-          throw new AuthenticationError('Unable to verify token');
+          throw new AuthenticationError("Unable to verify token" + err);
         }
+        const result = await resolve.apply(this, args);
+        return result;
       } else {
-        throw new AuthenticationError('No token provided');
+        throw new AuthenticationError("No token provided");
       }
     };
   }

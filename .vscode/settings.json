@@ -1,0 +1,24 @@
+{
+    "eslint.workingDirectories": [
+        {
+            "directory": "server",
+            "changeProcessCWD": true
+        },
+        {
+            "directory": "client",
+            "changeProcessCWD": true
+        }
+    ],
+    "eslint.validate": [
+        "javascript",
+        "javascriptreact",
+        {
+            "language": "typescript",
+            "autoFix": true
+        },
+        {
+            "language": "typescriptreact",
+            "autoFix": true
+        }
+    ]
+}

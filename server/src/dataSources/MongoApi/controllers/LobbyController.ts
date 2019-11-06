@@ -1,11 +1,11 @@
-import Lobby, { LobbyModel } from '../models/LobbyModel';
-import { NotFoundError } from '../../../utils/errors';
-import Player from '../models/PlayerModel';
-import PlayerController from './PlayerController';
+import Lobby, { LobbyModel } from "../models/LobbyModel";
+import { NotFoundError } from "../../../utils/errors";
+import PlayerController from "./PlayerController";
 
 interface JoinLobbyArguments {
   lobbyId: string;
   username: string;
+  deviceId: string;
 }
 
 export default class LobbyController {
@@ -14,28 +14,31 @@ export default class LobbyController {
     this.playerController = playerController;
   }
 
-  async joinLobby(args: JoinLobbyArguments) {
+  async joinLobby(args: JoinLobbyArguments): Promise<LobbyModel> {
     const lobby = await this.getLobby(args.lobbyId);
     if (!lobby) {
       throw NotFoundError;
     }
 
     const user = await this.playerController.createPlayer({
-      username: args.username
+      username: args.username,
+      deviceId: args.deviceId
     });
 
-    lobby.player_ids.push(user._id);
+    lobby.playerIds.push(user._id);
     return await lobby.save();
   }
-  async getLobbies() {
+  async getLobbies(): Promise<LobbyModel[]> {
     return await Lobby.find();
   }
 
-  async getLobby(id: string) {
+  async getLobby(id: string): Promise<LobbyModel | null> {
     return await Lobby.findById(id);
   }
 
-  async createLobby(args: Pick<LobbyModel, 'name' | 'player_ids'>) {
+  async createLobby(
+    args: Pick<LobbyModel, "name" | "playerIds">
+  ): Promise<LobbyModel> {
     return await Lobby.create(args);
   }
 }

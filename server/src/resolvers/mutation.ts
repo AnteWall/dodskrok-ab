@@ -1,8 +1,8 @@
-import { MutationResolvers, AuthToken } from '../generated/graphql';
-import { GraphQLContext } from './resolvers';
-import { sign, verify } from 'jsonwebtoken';
+import { MutationResolvers } from "../generated/graphql";
+import { GraphQLContext } from "./resolvers";
+import { sign } from "jsonwebtoken";
 
-const SECRET = process.env.SECRET_TOKEN || 'development';
+const SECRET = process.env.SECRET_TOKEN || "development";
 
 interface DebugToken {
   id: string;
@@ -21,12 +21,15 @@ const mutationResolver: MutationResolvers<GraphQLContext> = {
   createLobby: async (_, { input }, { dataSources }) => {
     return await dataSources.mongoApi
       .lobbies()
-      .createLobby({ name: input.name, player_ids: [] });
+      .createLobby({ name: input.name, playerIds: [] });
   },
-  joinLobby: async (_, { input }, { dataSources }) => {
-    return await dataSources.mongoApi
-      .lobbies()
-      .joinLobby({ username: input.username, lobbyId: input.lobbyId });
+  joinLobby: async (_, { input }, { dataSources, authToken }) => {
+    return await dataSources.mongoApi.lobbies().joinLobby({
+      username: input.username,
+      lobbyId: input.lobbyId,
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+      deviceId: authToken!.deviceId
+    });
   }
 };
 

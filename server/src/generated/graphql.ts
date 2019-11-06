@@ -1,5 +1,6 @@
 import { GraphQLResolveInfo } from 'graphql';
 import { LobbyModel } from '../dataSources/MongoApi/models/LobbyModel';
+import { PlayerModel } from '../dataSources/MongoApi/models/PlayerModel';
 export type Maybe<T> = T | null;
 export type RequireFields<T, K extends keyof T> = { [X in Exclude<keyof T, K>]?: T[X] } & { [P in K]-?: NonNullable<T[P]> };
 /** All built-in and custom scalars, mapped to their actual values */
@@ -77,7 +78,7 @@ export type MutationJoinLobbyArgs = {
 
 export type Player = {
    __typename?: 'Player',
-  user: User,
+  username: Scalars['String'],
   score: Scalars['Int'],
 };
 
@@ -91,12 +92,6 @@ export type Query = {
 
 export type QueryLobbyArgs = {
   id: Scalars['ID']
-};
-
-export type User = {
-   __typename?: 'User',
-  id: Scalars['String'],
-  name: Scalars['String'],
 };
 
 
@@ -174,8 +169,7 @@ export type ResolversTypes = {
   String: ResolverTypeWrapper<Scalars['String']>,
   ID: ResolverTypeWrapper<Scalars['ID']>,
   Lobby: ResolverTypeWrapper<LobbyModel>,
-  Player: ResolverTypeWrapper<Player>,
-  User: ResolverTypeWrapper<User>,
+  Player: ResolverTypeWrapper<PlayerModel>,
   Int: ResolverTypeWrapper<Scalars['Int']>,
   Mutation: ResolverTypeWrapper<{}>,
   AuthToken: ResolverTypeWrapper<AuthToken>,
@@ -192,8 +186,7 @@ export type ResolversParentTypes = {
   String: Scalars['String'],
   ID: Scalars['ID'],
   Lobby: LobbyModel,
-  Player: Player,
-  User: User,
+  Player: PlayerModel,
   Int: Scalars['Int'],
   Mutation: {},
   AuthToken: AuthToken,
@@ -248,7 +241,7 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
 };
 
 export type PlayerResolvers<ContextType = any, ParentType extends ResolversParentTypes['Player'] = ResolversParentTypes['Player']> = {
-  user?: Resolver<ResolversTypes['User'], ParentType, ContextType>,
+  username?: Resolver<ResolversTypes['String'], ParentType, ContextType>,
   score?: Resolver<ResolversTypes['Int'], ParentType, ContextType>,
 };
 
@@ -258,11 +251,6 @@ export type QueryResolvers<ContextType = any, ParentType extends ResolversParent
   lobbies?: Resolver<Array<Maybe<ResolversTypes['Lobby']>>, ParentType, ContextType>,
 };
 
-export type UserResolvers<ContextType = any, ParentType extends ResolversParentTypes['User'] = ResolversParentTypes['User']> = {
-  id?: Resolver<ResolversTypes['String'], ParentType, ContextType>,
-  name?: Resolver<ResolversTypes['String'], ParentType, ContextType>,
-};
-
 export type Resolvers<ContextType = any> = {
   AuthToken?: AuthTokenResolvers<ContextType>,
   DebugToken?: DebugTokenResolvers<ContextType>,
@@ -270,7 +258,6 @@ export type Resolvers<ContextType = any> = {
   Mutation?: MutationResolvers<ContextType>,
   Player?: PlayerResolvers<ContextType>,
   Query?: QueryResolvers<ContextType>,
-  User?: UserResolvers<ContextType>,
 };
 
 

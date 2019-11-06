@@ -1,4 +1,4 @@
 type Player {
-  user: User!
+  username: String!
   score: Int!
 }

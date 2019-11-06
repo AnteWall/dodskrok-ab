@@ -1,8 +1,8 @@
-import LobbyController from './controllers/LobbyController';
-import PlayerController from './controllers/PlayerController';
-import { DataSource } from 'apollo-datasource';
+import LobbyController from "./controllers/LobbyController";
+import PlayerController from "./controllers/PlayerController";
+import { DataSource } from "apollo-datasource";
 
-import connection from './connection';
+import connection from "./connection";
 
 export default class MongoApi extends DataSource {
   private connection = connection;

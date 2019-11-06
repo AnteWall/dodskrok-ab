@@ -1,4 +1,4 @@
-import { model, Document, Schema } from 'mongoose';
+import { model, Document, Schema } from "mongoose";
 
 export interface PlayerModel extends Document {
   username: string;
@@ -12,5 +12,5 @@ const PlayerSchema = new Schema({
   score: { type: Number, default: 0, required: true }
 });
 
-const Player = model<PlayerModel>('Player', PlayerSchema);
+const Player = model<PlayerModel>("Player", PlayerSchema);
 export default Player;

@@ -6,6 +6,7 @@ generates:
     config:
       mappers:
         Lobby: ../dataSources/MongoApi/models/LobbyModel#LobbyModel
+        Player: ../dataSources/MongoApi/models/PlayerModel#PlayerModel
     plugins:
       - 'typescript'
       - 'typescript-resolvers'
