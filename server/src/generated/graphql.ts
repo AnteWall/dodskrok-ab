@@ -42,6 +42,7 @@ export type DebugToken = {
 
 export type JoinLobbyInput = {
   lobbyId: Scalars['ID'],
+  username: Scalars['String'],
 };
 
 export type Lobby = {

@@ -10,13 +10,8 @@ interface DebugToken {
 }
 
 const mutationResolver: MutationResolvers<GraphQLContext> = {
-  authenticate: async (_, { deviceId }, { dataSources }) => {
-    const user = {
-      id: 'MAKE A UNIQE ID'
-    };
-
-    const jwt = sign({ ...user, deviceId }, SECRET);
-
+  authenticate: async (_, { deviceId }) => {
+    const jwt = sign({ deviceId }, SECRET);
     return { jwt };
   },
   debugToken: (_, _args, context) => {
@@ -31,7 +26,7 @@ const mutationResolver: MutationResolvers<GraphQLContext> = {
   joinLobby: async (_, { input }, { dataSources }) => {
     return await dataSources.mongoApi
       .lobbies()
-      .joinLobby({ lobbyId: input.lobbyId });
+      .joinLobby({ username: input.username, lobbyId: input.lobbyId });
   }
 };
 

@@ -1,20 +1,31 @@
 import Lobby, { LobbyModel } from '../models/LobbyModel';
 import { NotFoundError } from '../../../utils/errors';
+import Player from '../models/PlayerModel';
+import PlayerController from './PlayerController';
 
 interface JoinLobbyArguments {
   lobbyId: string;
+  username: string;
 }
 
 export default class LobbyController {
+  playerController: PlayerController;
+  constructor(playerController: PlayerController) {
+    this.playerController = playerController;
+  }
+
   async joinLobby(args: JoinLobbyArguments) {
     const lobby = await this.getLobby(args.lobbyId);
     if (!lobby) {
       throw NotFoundError;
     }
 
-    // TODO ADD USER
+    const user = await this.playerController.createPlayer({
+      username: args.username
+    });
 
-    return lobby;
+    lobby.player_ids.push(user._id);
+    return await lobby.save();
   }
   async getLobbies() {
     return await Lobby.find();

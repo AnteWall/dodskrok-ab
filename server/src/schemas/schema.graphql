@@ -24,4 +24,5 @@ input CreateLobbyInput {
 }
 input JoinLobbyInput {
   lobbyId: ID!
+  username: String!
 }
